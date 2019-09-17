@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,44 +9,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Hello from .jsp
+	<table border="1px">
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+		</tr>
+		<%
+			Map<String, Integer> persons = (Map<String, Integer>) request.getAttribute("persons");
+			for(Map.Entry<String, Integer> entry: persons.entrySet()){
+				out.println("<tr><td>" + entry.getKey() + "</td><td>" + entry.getValue() + "</td></tr>");
+			}
+		%>
+	</table>
 	<br>
+	<table border="1px">
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+		</tr>
+		<c:forEach var="person" items="${persons}">
+			<tr>
+				<td><c:out value="${person.key}"/></td>
+				<td><c:out value="${person.value}"/></td>
+			</tr>
+		</c:forEach>
+	</table>
 	
-	<jsp:declaration>
-		String s23 = "sdsdvsdv";
-	</jsp:declaration>
+	<c:set var="myVal" value="1234"/>
 	
-	<%!
-	private int sum(int a, int b){
-		return a + b;
-	}
-	String s = "Hello2";
+	<p><c:out value="${myVal}"/></p>
 	
-	%>
-	
-	<%
-		int i = 1;
-		int j = 2;
-		out.println(i + j);
-	%>
-	
-	<%
-	out.println("<br>");
-	out.println(sum(4, 5));
-	%>
-	<br>
-	<%
-	out.println(s23);
-	%>
-	<br>
-	<%=1232 %>
-	<br>
-	<%=Arrays.asList(1, 2, 3, 4, 5) %>
-	
-	<jsp:scriptlet>
-		out.println("jsp-scriptlet");
-	</jsp:scriptlet>
-	
-	<jsp:expression>s</jsp:expression>
 </body>
 </html>
