@@ -18,13 +18,42 @@ public class MyServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("MyServlet.doGet()");
 
+		String name = request.getParameter("firstName");
+		String surName = request.getParameter("secondName");
+		
+		System.out.println(name);
+		System.out.println(surName);
+		
 		// response.setContentType("text/html");
 		// response.setCharacterEncoding("UTF-8");
 
 		response.setContentType("text/html;charset=utf-8");
 
 		PrintWriter out = response.getWriter();
-		out.println("<h3>Привет от MyServlet</h3><br>Again");
+		out.println("<h3>Привет от MyServlet</h3> " + name + " " + surName + "<br>Again");
+		out.close();
+	}
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("MyServlet.doPost()");
+
+		request.setCharacterEncoding("UTF-8");
+		
+		String name = request.getParameter("firstName");
+		String surName = request.getParameter("secondName");
+		
+		System.out.println(name);
+		System.out.println(surName);
+		
+		// response.setContentType("text/html");
+		// response.setCharacterEncoding("UTF-8");
+
+		response.setContentType("text/html;charset=utf-8");
+
+		PrintWriter out = response.getWriter();
+		out.println("<h3>Привет от MyServlet</h3> " + name + " " + surName + "<br>Again");
 		out.close();
 	}
 
